@@ -24,7 +24,7 @@ export interface IRhfSelectProp extends SelectProps {
    * select item list that will show on menu if you pass children prop this prop will be ignored
    * @default []
    * */
-  items?: { value: any; label: string }[];
+  items?: { value: any; label?: string }[];
 }
 
 export function RhfSelect(props: IRhfSelectProp): React.ReactElement {
@@ -60,7 +60,7 @@ export function RhfSelect(props: IRhfSelectProp): React.ReactElement {
               ? children
               : items?.map((it) => (
                   <MenuItem key={it.value} value={it.value}>
-                    {it.label}
+                    {it.label ? it.label : it.value}
                   </MenuItem>
                 ))}
           </Select>
