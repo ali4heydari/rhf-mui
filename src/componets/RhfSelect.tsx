@@ -52,7 +52,7 @@ export function RhfSelect(props: IRhfSelectProp): React.ReactElement {
       disabled={disabled}
       error={!!rhfError}
     >
-      {label ? <InputLabel id={`${id}-label`}>{label}</InputLabel> : label}
+      {label ? <InputLabel id={`${id}-label`}>{label}</InputLabel> : null}
       <Controller
         render={(childProps) => (
           <Select {...childProps} labelId={`${id}_label`} label={label}>
