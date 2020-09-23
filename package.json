@@ -47,6 +47,7 @@
     }
   ],
   "devDependencies": {
+    "@material-ui/types": "^5.1.0",
     "@size-limit/preset-small-lib": "^4.6.0",
     "@types/react": "^16.9.49",
     "@types/react-dom": "^16.9.8",
@@ -57,5 +58,10 @@
     "tsdx": "^0.14.0",
     "tslib": "^2.0.1",
     "typescript": "^4.0.3"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "react-hook-form": "^6.8.4"
   }
 }
