@@ -1,9 +1,10 @@
-import { IconButton, InputAdornment } from "@material-ui/core";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
-import React, { useCallback, useState } from "react";
+import InputAdornment from '@material-ui/core/InputAdornment';
+import IconButton from '@material-ui/core/IconButton';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import React, { useCallback, useState } from 'react';
 
-import { RhfTextField, RHFTextFieldProps } from "./RhfTextField";
+import { RhfTextField, RHFTextFieldProps } from './RhfTextField';
 
 export function RhfPasswordField(props: RHFTextFieldProps): React.ReactElement {
   const { ...rest } = props;
@@ -17,13 +18,13 @@ export function RhfPasswordField(props: RHFTextFieldProps): React.ReactElement {
   );
 
   const handleClickShowPassword = useCallback((): void => {
-    setIsVisible((prevState) => !prevState);
+    setIsVisible(prevState => !prevState);
   }, []);
 
   return (
     <RhfTextField
       {...rest}
-      type={isVisible ? "text" : "password"}
+      type={isVisible ? 'text' : 'password'}
       InputProps={{
         endAdornment: (
           <InputAdornment position="end">

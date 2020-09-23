@@ -1,14 +1,12 @@
-import {
-  FormControl,
-  FormHelperText,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectProps,
-} from "@material-ui/core";
+import Select from "@material-ui/core/Select";
+import FormControl from "@material-ui/core/FormControl";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import type {SelectProps} from "@material-ui/core/Select";
 import React from "react";
-import { Controller } from "react-hook-form";
-import type { Control, FieldError } from "react-hook-form";
+import {Controller} from "react-hook-form";
+import type {Control, FieldError} from "react-hook-form";
 
 export interface IRhfSelectProp extends SelectProps {
   /**
@@ -59,10 +57,10 @@ export function RhfSelect(props: IRhfSelectProp): React.ReactElement {
             {children
               ? children
               : items?.map((it) => (
-                  <MenuItem key={it.value} value={it.value}>
-                    {it.label ? it.label : it.value}
-                  </MenuItem>
-                ))}
+                <MenuItem key={it.value} value={it.value}>
+                  {it.label ? it.label : it.value}
+                </MenuItem>
+              ))}
           </Select>
         )}
         name={name}

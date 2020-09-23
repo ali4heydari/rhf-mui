@@ -1,4 +1,5 @@
-import { TextField, TextFieldProps, Zoom } from "@material-ui/core";
+import TextField from "@material-ui/core/TextField";
+import type {TextFieldProps} from "@material-ui/core/TextField";
 import React, { CSSProperties } from "react";
 import type { FieldError } from "react-hook-form";
 
@@ -34,15 +35,7 @@ export function RhfTextField(props: RHFTextFieldProps): React.ReactElement {
       margin={margin}
       error={!!rhfError}
       autoComplete={autoComplete}
-      helperText={
-        rhfError ? (
-          <Zoom in={!!rhfError?.message}>
-            <span style={helperTextStyle}>{rhfError?.message}</span>
-          </Zoom>
-        ) : (
-          " "
-        )
-      }
+      helperText={rhfError?.message}
     />
   );
 }
