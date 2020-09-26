@@ -3,9 +3,13 @@ import FormControl from "@material-ui/core/FormControl";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
+// https://stackoverflow.com/questions/59833120/parsing-error-expected-in-import-type
+// eslint-disable-next-line
 import type {SelectProps} from "@material-ui/core/Select";
 import React from "react";
 import {Controller} from "react-hook-form";
+// https://stackoverflow.com/questions/59833120/parsing-error-expected-in-import-type
+// eslint-disable-next-line
 import type {Control, FieldError} from "react-hook-form";
 
 export interface IRhfSelectProp extends SelectProps {

@@ -1,6 +1,10 @@
 import TextField from "@material-ui/core/TextField";
-import type {TextFieldProps} from "@material-ui/core/TextField";
+// https://stackoverflow.com/questions/59833120/parsing-error-expected-in-import-type
+// eslint-disable-next-line
+import type { TextFieldProps } from "@material-ui/core/TextField";
 import React, { CSSProperties } from "react";
+// https://stackoverflow.com/questions/59833120/parsing-error-expected-in-import-type
+// eslint-disable-next-line
 import type { FieldError } from "react-hook-form";
 
 export type RHFTextFieldProps = TextFieldProps & {

@@ -1,6 +1,8 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
+// https://stackoverflow.com/questions/59833120/parsing-error-expected-in-import-type
+// eslint-disable-next-line
 import type { ButtonProps } from '@material-ui/core/Button';
 import { FormState } from 'react-hook-form';
 
