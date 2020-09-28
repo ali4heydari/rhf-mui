@@ -1,19 +1,25 @@
-import 'react-app-polyfill/ie11';
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import { Resolver, useForm } from 'react-hook-form';
-import { RhfPasswordField, RhfSelect, RhfTextField } from '../src/componets';
-import { Container } from '@material-ui/core';
-import { propertyOf as p } from '../src/utils';
-import { useCallback, useMemo } from 'react';
-import { RhfButton } from '../src/componets/RhfButton';
-import * as Yup from 'yup';
-import { yupResolver } from '@hookform/resolvers';
+import "react-app-polyfill/ie11";
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import { Resolver, useForm } from "react-hook-form";
+import { RhfPasswordField, RhfSelect, RhfTextField } from "../src/componets";
+import { Container } from "@material-ui/core";
+import { propertyOf as p } from "../src/utils";
+import { useCallback, useMemo } from "react";
+import { RhfButton } from "../src/componets/RhfButton";
+import * as Yup from "yup";
+import { yupResolver } from "@hookform/resolvers";
+import { RhfDatePicker } from "../src/componets/RhfDatePicker";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+// @ts-ignore
+import JalaliUtils from "@date-io/jalaali";
+import jMoment from "moment-jalaali";
 
 interface Values {
   firstName: string;
   lastName: string;
-  gender: 'male' | 'female' | 'other';
+  birthdate: Date;
+  gender: "male" | "female" | "other";
   password: string;
   confirmPassword: string;
 }
@@ -23,21 +29,22 @@ const App = () => {
     () =>
       yupResolver(
         Yup.object().shape({
-          [p<Values>('firstName')]: Yup.string().required(),
-          [p<Values>('lastName')]: Yup.string().required(),
-          [p<Values>('gender')]: Yup.string()
+          [p<Values>("firstName")]: Yup.string().required(),
+          [p<Values>("lastName")]: Yup.string().required(),
+          [p<Values>("birthdate")]: Yup.date().required(),
+          [p<Values>("gender")]: Yup.string()
             .required()
-            .oneOf(['male', 'female', 'other']),
-          [p<Values>('password')]: Yup.string()
+            .oneOf(["male", "female", "other"]),
+          [p<Values>("password")]: Yup.string()
             .required()
             .matches(
               new RegExp(
                 /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
               )
             ),
-          [p<Values>('confirmPassword')]: Yup.string()
+          [p<Values>("confirmPassword")]: Yup.string()
             .required()
-            .oneOf([Yup.ref(p<Values>('password'))]),
+            .oneOf([Yup.ref(p<Values>("password"))]),
         })
       ),
     []
@@ -45,7 +52,7 @@ const App = () => {
 
   const defaultValues = useMemo<Partial<Values>>(
     () => ({
-      gender: 'male',
+      gender: "male",
     }),
     []
   );
@@ -53,7 +60,7 @@ const App = () => {
   const { handleSubmit, formState, control, errors, register } = useForm<
     Values
   >({
-    mode: 'all',
+    mode: "all",
     resolver,
     defaultValues,
   });
@@ -68,51 +75,69 @@ const App = () => {
 
   const selectItems = useMemo(
     () => [
-      { value: 'male', label: 'male' },
-      { value: 'female', label: 'female' },
-      { value: 'other', label: 'other' },
+      { value: "male", label: "male" },
+      { value: "female", label: "female" },
+      { value: "other", label: "other" },
     ],
     []
   );
 
   return (
     <Container maxWidth="md">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <RhfTextField
-          name={p<Values>('firstName')}
-          rhfError={errors.firstName}
-          inputRef={register}
-          label={p<Values>('firstName')}
-        />
-        <RhfTextField
-          name={p<Values>('lastName')}
-          rhfError={errors.lastName}
-          label={p<Values>('lastName')}
-          inputRef={register}
-        />
-        <RhfSelect
-          name={p<Values>('gender')}
-          rhfError={errors.gender}
-          label={p<Values>('gender')}
-          control={control}
-          items={selectItems}
-        />
-        <RhfPasswordField
-          name={p<Values>('password')}
-          rhfError={errors.password}
-          label={p<Values>('password')}
-          inputRef={register}
-        />
-        <RhfPasswordField
-          name={p<Values>('confirmPassword')}
-          rhfError={errors.confirmPassword}
-          label={p<Values>('confirmPassword')}
-          inputRef={register}
-        />
-        <RhfButton formState={formState} />
-      </form>
+      <MuiPickersUtilsProvider
+        libInstance={jMoment}
+        utils={JalaliUtils}
+        locale="fa"
+      >
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <RhfTextField
+            name={p<Values>("firstName")}
+            rhfError={errors.firstName}
+            inputRef={register}
+            label={p<Values>("firstName")}
+          />
+          <RhfTextField
+            name={p<Values>("lastName")}
+            rhfError={errors.lastName}
+            label={p<Values>("lastName")}
+            inputRef={register}
+          />
+          <RhfDatePicker
+            name={p<Values>("birthdate")}
+            rhfError={errors.birthdate}
+            label={p<Values>("birthdate")}
+            // @ts-ignore
+            control={control}
+          />
+          <RhfSelect
+            name={p<Values>("gender")}
+            rhfError={errors.gender}
+            label={p<Values>("gender")}
+            // @ts-ignore
+            control={control}
+            items={selectItems}
+          />
+          <RhfPasswordField
+            name={p<Values>("password")}
+            rhfError={errors.password}
+            label={p<Values>("password")}
+            inputRef={register}
+          />
+          <RhfPasswordField
+            name={p<Values>("confirmPassword")}
+            rhfError={errors.confirmPassword}
+            label={p<Values>("confirmPassword")}
+            inputRef={register}
+          />
+
+          <RhfButton
+            // @ts-ignore
+            formState={formState}
+          />
+        </form>
+      </MuiPickersUtilsProvider>
     </Container>
   );
 };
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById("root"));

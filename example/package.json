@@ -8,9 +8,11 @@
     "build": "parcel build index.html"
   },
   "dependencies": {
+    "@date-io/jalaali": "^2.10.6",
     "@hookform/resolvers": "^0.1.1",
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",
+    "moment-jalaali": "^0.9.2",
     "react-app-polyfill": "^1.0.0",
     "react-hook-form": "^6.8.4",
     "yup": "^0.29.3"
@@ -22,6 +24,7 @@
   },
   "devDependencies": {
     "@material-ui/types": "^5.1.0",
+    "@types/moment-jalaali": "^0.7.4",
     "@types/react": "^16.9.11",
     "@types/react-dom": "^16.8.4",
     "@types/yup": "^0.29.7",
